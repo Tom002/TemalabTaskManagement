@@ -1,0 +1,25 @@
+
+body {
+  background-color: rgb(234, 234, 234) !important;
+}
+
+.ui.inverted.top.fixed.menu {
+  background-image: linear-gradient(
+    135deg,
+    rgb(24, 42, 115) 0%,
+    rgb(33, 138, 174) 69%,
+    rgb(32, 167, 172) 89%
+  ) !important;
+}
+
+.item .dragHandle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: move;
+  width: 20px;
+  height: 16px;
+  background-color: aqua;
+}
+
+
