@@ -11,10 +11,9 @@ import {
 import { RouteComponentProps } from "react-router";
 import TaskStore from "../../app/stores/taskStore";
 import { observer } from "mobx-react-lite";
-import DatePicker from 'react-datepicker';
+import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { runInAction } from "mobx";
-
 
 interface DetailParams {
   id: string;
@@ -40,22 +39,18 @@ const TaskForm: React.FC<RouteComponentProps<DetailParams>> = ({
   useEffect(() => {
     if (match.params.id) {
       let id = Number(match.params.id);
-      console.log(id);
       if (isNaN(id)) {
         history.push("/notfound");
       } else {
         loadTask(id).then(() => {
-          if(selectedTask) {
+          if (selectedTask) {
+            console.log("Back from server");
             console.log(selectedTask);
             runInAction(() => {
-              setTask({ ...task, ['deadline']: new Date(selectedTask.deadline)});
-              selectedTask.deadline = new Date();
               setTask(selectedTask);
-              selectedTask.deadline = task.deadline;
-            })
-            
-            
-         }});
+            });
+          }
+        });
       }
       return () => {
         clearTask();
@@ -65,7 +60,7 @@ const TaskForm: React.FC<RouteComponentProps<DetailParams>> = ({
     if (stateRegistry.size === 0) {
       loadStates();
     }
-  }, [loadTask, selectedTask, clearTask, match.params.id]);
+  }, [loadTask, selectedTask, clearTask, match.params.id, history, loadStates, stateRegistry.size]);
 
   const [task, setTask] = useState<ITask>({
     id: 0,
@@ -91,15 +86,14 @@ const TaskForm: React.FC<RouteComponentProps<DetailParams>> = ({
   };
 
   const dateChange = (date: Date | null) => {
-    if(date) {
-      setTask({ ...task, ["deadline"]: date});
+    if (date) {
+      setTask({ ...task, ["deadline"]: date });
     }
-  }
+  };
 
   const handleSubmit = () => {
-    
     editTask(task).then(() => history.push("/tasks"));
-  }
+  };
 
   return (
     <Grid>

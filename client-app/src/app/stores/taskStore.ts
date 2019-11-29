@@ -7,7 +7,6 @@ import { isUndefined } from 'util';
 import { createContext } from 'react';
 import { DropdownItemProps } from 'semantic-ui-react';
 import { toast } from 'react-toastify';
-import { history} from '../../index';
 
 configure({enforceActions: 'always'})
 
@@ -32,7 +31,7 @@ class TaskStore {
             value : a.stateId
         }));
     }
-
+    
     @computed get newItemOrder() {
         let orders = Array.from(this.taskRegistry.values()).map(a => a.order)
         return Math.max(...orders)+1;
@@ -207,8 +206,15 @@ class TaskStore {
 
     @action loadTask = async (id: number) => {
         let task: ITask | undefined = this.taskRegistry.get(id);
+        console.log(task);
         if(task) {
-            this.selectedTask = task;
+            runInAction('parsing date', () => {
+                this.selectedTask = isUndefined(task) ? null : task;
+                if(this.selectedTask && task) {
+                    this.selectedTask.deadline = new Date(task.deadline);
+                }
+                
+            })
         }
         else {
             this.loading = true;
