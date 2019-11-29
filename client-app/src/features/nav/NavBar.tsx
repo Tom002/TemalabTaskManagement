@@ -1,5 +1,5 @@
 import React from 'react'
-import {Menu, Container, Button} from 'semantic-ui-react'
+import {Menu, Container} from 'semantic-ui-react'
 import {NavLink} from 'react-router-dom';
 
 const NavBar = () => {

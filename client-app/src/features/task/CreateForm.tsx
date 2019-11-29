@@ -9,7 +9,6 @@ import {
   Dropdown,
   DropdownProps,
   Grid,
-  Input
 } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import DatePicker from "react-datepicker";

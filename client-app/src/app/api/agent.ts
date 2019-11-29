@@ -9,8 +9,7 @@ import {history} from '../../index';
 axios.defaults.baseURL = 'http://localhost:52126/api';
 
 axios.interceptors.response.use(undefined, error => {
-    const {status, data, config} = error.response;
-    console.log(error.response);
+    const {status} = error.response;
     if(status === 404) {
         history.push('/tasks');
     }
