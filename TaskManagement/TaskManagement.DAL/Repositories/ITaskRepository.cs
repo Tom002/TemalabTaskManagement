@@ -13,7 +13,8 @@ namespace TaskManagement.DAL.Repositories
         Task<Todo> GetTodo(int taskId);
         void DeleteTodo(Todo task);
         Task CreateTodo(Todo task);
-        //Task UpdateTask(Models.Task task);
+        Task<bool> TodoExists(int id);
+        Task UpdateTask(int id, Todo task);
         Task<bool> SaveAll();
         void OrderChange(int taskId, int oldOrder, int newOrder);
 

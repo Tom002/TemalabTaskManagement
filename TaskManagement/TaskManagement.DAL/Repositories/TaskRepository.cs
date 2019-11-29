@@ -47,6 +47,21 @@ namespace TaskManagement.DAL.Repositories
             await _context.Todos.AddAsync(task);
         }
 
+        public async Task<bool> TodoExists(int id)
+        {
+            return await _context.Todos.AnyAsync(t => t.Id == id);
+        }
+
+        public async Task UpdateTask(int id, Todo task)
+        {
+            var todo = await _context.Todos.FindAsync(id);
+            int oldOrder = todo.Order;
+            if (task.Order != oldOrder)
+            {
+                OrderChange(id, oldOrder, task.Order);
+            }
+        }
+
         public void OrderChange(int taskId, int oldOrder, int newOrder)
         {
             if (oldOrder > newOrder)
