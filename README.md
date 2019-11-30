@@ -113,6 +113,8 @@ Az alkalmazás mindkét esetben a `http://localhost:52126/api` url-en fog futni.
 Ezt át lehet írni `TaskManagement.Web`/`Properties`/`launchSettings.json` fájlban, ekkor azonban ezt a React alkalmazásban is át kell írni az `src`/`app`/`api`/`agent.ts` fájlban.
 
 Unit tesztek futtathatóak fordítás után a Visual Studio Test/TestExplorer ablakában.
+Vagy ha nem használunk Visual Studio-t akkor a `Task management` mappába navigálva terminálból kiadható a `dotnet test`
+parancs a tesztek futtatásához.
 
 ## Build, debug
 
@@ -121,5 +123,4 @@ A React alkalmazás debugolásához jól használható a React DevTools böngés
 [Firefox devtools extension](https://addons.mozilla.org/hu/firefox/addon/react-devtools/)
 
 A .Net Core alkalmazás könnyen debugolható a Visual Studio beépített debuggerét használva. 
-Vagy ha nem használunk Visual Studio-t akkor a `Task management` mappába navigálva terminálból kiadható a `dotnet test`
-parancs a tesztek futtatásához.
+
