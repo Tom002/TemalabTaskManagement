@@ -120,4 +120,6 @@ A React alkalmazás debugolásához jól használható a React DevTools böngés
 [Chrome devtools extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
 [Firefox devtools extension](https://addons.mozilla.org/hu/firefox/addon/react-devtools/)
 
-A .Net Core alkalmazás könnyen debugolható a Visual Studio beépített debuggerét használva
+A .Net Core alkalmazás könnyen debugolható a Visual Studio beépített debuggerét használva. 
+Vagy ha nem használunk Visual Studio-t akkor a `Task management` mappába navigálva terminálból kiadható a `dotnet test`
+parancs a tesztek futtatásához.
