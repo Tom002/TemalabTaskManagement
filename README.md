@@ -65,7 +65,7 @@ A React alkalmazás a `client-app` mappában található, vázlatos felépítés
 
 		-  `TaskCard.tsx`: Megjeleníti egy paraméterként kapott Task adatait, valamint a hozzá tartozó Edit és Delete gombokat.
 
-		-  `EditForm.tsx`: Betölt egy adott Task-ot, a paramétreként kapott id alapján. A betöltött Task szerkesztését teszi lehetővé. **Semantic UI** form elemeket használ illetve a `react-datepicker` npm csomagot
+		-  `EditForm.tsx`: Betölt egy adott Task-ot, a paramétreként kapott id alapján. A betöltött Task szerkesztését teszi lehetővé. Semantic UI form elemeket használ illetve a `react-datepicker` npm csomagoból származó dátum választót
 
 		-  `CreateForm.tsx`: Az EditFormhoz hasonlóan működik, csak nem tölt be Taskot, hanem egy üres Taskal inicilizálja magát
 
@@ -75,12 +75,13 @@ A React alkalmazás a `client-app` mappában található, vázlatos felépítés
 -  Visual Studio vagy valamilyen más IDE
 	- [Visual Studio 2019 és Visual Studio Code letöltés](https://visualstudio.microsoft.com/downloads/)
 - NET Core SDK 2.2 vagy frissebb verzió 
-	- [.Net Core 2.2 download](https://dotnet.microsoft.com/download/dotnet-core/2.2)
+	- [.Net Core 2.2 letöltés](https://dotnet.microsoft.com/download/dotnet-core/2.2)
 - Npm csomagkezelő a React alkalmazáshoz
 	- Ezt legegyszerűbben a **NodeJs** telepítésével szerezhetjük be.
-	- [NodeJs download](https://nodejs.org/en/download/)
+	- [NodeJs letöltés](https://nodejs.org/en/download/)
 	- Telepítés után kiadhatjuk egy terminálban az `npm -v` parancsot hogy ellenőrizzük hogy feltelepült-e, illetve hogy milyen verzió települt fel.
 - Microsoft Sql Server 2012 vagy újabb
+	- [Microsoft Sql Server 2012 letöltés](https://www.microsoft.com/en-us/download/details.aspx?id=29062)
 	- Használható más adatbázis is ha van hozzá EF Core provider, de ehhez szükséges NuGet csomagot akkor külön hozzá kell adni a projekthez
 	- [EF Core providerek listája](https://docs.microsoft.com/en-us/ef/core/providers/?tabs=dotnet-core-cli)
   
