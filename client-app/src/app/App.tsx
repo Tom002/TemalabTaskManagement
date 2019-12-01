@@ -11,14 +11,9 @@ import TaskPriority from '../features/task/TaskPriority';
 import StateCreateForm from '../features/state/StateCreateForm';
 import NotFound from '../features/NotFound';
 import {ToastContainer} from 'react-toastify';
+import TaskDetails from '../features/task/TaskDetails';
 
 const App: React.FC = () => {
-
-  const taskStore = useContext(TaskStore);
-  useEffect(() => { 
-    taskStore.loadTasks();
-    taskStore.loadStates();
-  }, [taskStore])
 
   return (
     <Fragment>
@@ -38,6 +33,10 @@ const App: React.FC = () => {
         <Route
           path={"/manageTask/:id"}
           component={EditForm}
+        />
+        <Route
+          path={"/viewTask/:id"}
+          component={TaskDetails}
         />
         <Route
           path={'/tasks/priority'}

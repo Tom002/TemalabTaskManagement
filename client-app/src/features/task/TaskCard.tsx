@@ -47,11 +47,11 @@ const TaskCard: React.FC<IProps> = ({ task }) => {
                   {task.order}
                 </a>
               }
-              <Card.Header>{task.title}</Card.Header>
+              <Card.Header>{task.title.slice(0, 15)}{task.title.length > 15 ? '...': ''}</Card.Header>
               <Card.Meta>
                 <Moment format="YYYY/MM/DD">{String(task.deadline)}</Moment>
               </Card.Meta>
-              <Card.Description>{task.description}</Card.Description>
+            <Card.Description>{task.description.slice(0, 25)}{task.description.length > 25 ? '...': ''}</Card.Description>
             </Card.Content>
             <Card.Content extra>
               <div className="ui two buttons">
@@ -66,12 +66,12 @@ const TaskCard: React.FC<IProps> = ({ task }) => {
                   Delete
                 </Button>
                 <Button
-                  positive
+                  primary
                   as={Link}
-                  to={`/manageTask/${task.id}`}
+                  to={`/viewTask/${task.id}`}
                   floated="right"
                 >
-                  Edit
+                  View
                 </Button>
               </div>
             </Card.Content>

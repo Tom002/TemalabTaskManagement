@@ -1,4 +1,4 @@
-import React, { useContext, useState, FormEvent } from "react";
+import React, { useContext, useState, FormEvent, useEffect } from "react";
 import TaksStore from "../../app/stores/taskStore";
 import { ITask } from "../../app/models/ITask";
 import { RouteComponentProps } from "react-router";
@@ -12,10 +12,11 @@ import {
 } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import DatePicker from "react-datepicker";
+import { toast } from "react-toastify";
 
 const CreateForm: React.FC<RouteComponentProps> = ({ history }) => {
   const taskStore = useContext(TaksStore);
-  const { createTask, statesForDropdown, newItemOrder } = taskStore;
+  const { createTask, statesForDropdown, newItemOrder, loadStates } = taskStore;
 
   const [task, setTask] = useState<ITask>({
     id: 0,
@@ -28,7 +29,11 @@ const CreateForm: React.FC<RouteComponentProps> = ({ history }) => {
 
   const handleFormSubmit = () => {
     task.order = newItemOrder;
-    createTask(task).then(() => {history.push('/tasks')});
+    createTask(task).then(() => 
+    {
+      history.push('/tasks')
+      toast.success(`Task named ${task.title.slice(0, 15)}${task.title.length > 15 ? '...': ''} succesfully created`);
+    });
   };
 
   const handleInputChange = (
@@ -51,6 +56,10 @@ const CreateForm: React.FC<RouteComponentProps> = ({ history }) => {
       console.log(task);
     }
   };
+
+  useEffect(() => {
+    loadStates();
+  }, [loadStates])
 
   return (
     <Grid>

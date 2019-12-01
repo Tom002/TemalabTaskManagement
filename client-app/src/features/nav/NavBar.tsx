@@ -28,7 +28,7 @@ const NavBar = () => {
         />
         <Menu.Item
           content='Add Status'
-          to='/createState'
+          to={'/createState'}
           as={NavLink}
         />
       </Container>

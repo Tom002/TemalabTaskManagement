@@ -1,12 +1,10 @@
-import React, { useContext } from "react";
-import {Card, Button } from "semantic-ui-react";
+import React, { useContext, useEffect } from "react";
+import {Card, Button, Icon } from "semantic-ui-react";
 import TaskCard from "./TaskCard";
 import TaskStore from "../../app/stores/taskStore";
 import { observer } from "mobx-react-lite";
 import styled from "styled-components";
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
-
-//background-color: ${(props: any) => (props.isDragging ? 'lightgreen': 'white')};
 
 const Container = styled.div`
   margin-top: 4em;
@@ -15,9 +13,9 @@ const Container = styled.div`
 
 const ColumnContainer = styled.div`
     margin: 8px;
-    display: flex;
+    display: inline-block;
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     flex-direction: column;
 `;
 
@@ -26,7 +24,7 @@ const TaskList = styled.div`
     padding: 8px;
     transition: background-color: 0.2s ease;
     flex-grow: 1;
-    min-height: 270px;
+    min-height: 242.55px;
 `;
 
 const getColor = (isDragging: Boolean) => {
@@ -43,6 +41,8 @@ const TasksGrid: React.FC = () => {
     tasksByOrder,
     deleteState,
     taskRegistry,
+    loadTasks,
+    loadStates,
     editTask
   } = taskStore;
 
@@ -61,6 +61,12 @@ const TasksGrid: React.FC = () => {
     }
   };
 
+  useEffect(() => {
+    loadTasks();
+    loadStates();
+
+  }, [loadTasks, loadStates])
+
   return (
     <DragDropContext onDragEnd={onDragEnd}>
       <Container>
@@ -78,12 +84,12 @@ const TasksGrid: React.FC = () => {
                       <Card.Header>
                         {state.name}
                         <Button
-                          className={"right floated tiny"}
-                          onClick={() => deleteState(state.stateId)}
-                          basic
                           color="red"
+                          basic
+                          className={"right floated mini"}
+                          onClick={() => deleteState(state.stateId)}
                         >
-                          Delete status
+                          Delete
                         </Button>
                       </Card.Header>
                     </Card.Content>

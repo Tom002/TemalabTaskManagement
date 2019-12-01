@@ -27,11 +27,11 @@ const TaskPriorityCard: React.FC<IProps> = ({ item, key, index }) => {
                   {item.order}
                 </a>
               }
-              <Card.Header>{item.title}</Card.Header>
+              <Card.Header>{item.title.slice(0, 15)}{item.title.length >15 ? '...': ''}</Card.Header>
               <Card.Meta>
                 <Moment format="YYYY/MM/DD">{String(item.deadline)}</Moment>
               </Card.Meta>
-              <Card.Description>{item.description}</Card.Description>
+              <Card.Description>{item.description.slice(0, 25)}{item.description.length > 25 ? '...': ''}</Card.Description>
             </Card.Content>
           </Card>
         </div>

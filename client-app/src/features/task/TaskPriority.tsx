@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { Grid } from "semantic-ui-react";
 import TaskStore from "../../app/stores/taskStore";
 import { observer } from "mobx-react-lite";
@@ -7,7 +7,7 @@ import TaskPriorityCard from "./TaskPriorityCard";
 
 const TaskPriority: React.FC = () => {
   const taskStore = useContext(TaskStore);
-  const { tasksByOrder, taskPriorityChange, taskRegistry } = taskStore;
+  const { tasksByOrder, taskPriorityChange, taskRegistry, loadTasks } = taskStore;
 
   const onDragEnd = (result: DropResult) => {
     const { destination, source, draggableId } = result;
@@ -25,6 +25,10 @@ const TaskPriority: React.FC = () => {
       taskPriorityChange(task, source.index, destination.index);
     }
   };
+
+  useEffect(() => {
+    loadTasks();
+  }, [loadTasks])
 
   return (
     <div>

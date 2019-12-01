@@ -60,6 +60,7 @@ class TaskStore {
     }
 
     @action loadTasks = async() => {
+        console.log("Load tasks");
         this.loading = true;
         try {
             const tasks = await agent.Tasks.list();
@@ -78,6 +79,7 @@ class TaskStore {
     }
 
     @action loadStates = async() => {
+        console.log("Load states");
         this.loading = true;
         try {
             const states = await agent.States.list();
@@ -205,31 +207,25 @@ class TaskStore {
     }
 
     @action loadTask = async (id: number) => {
+        console.log("Load task");
         let task: ITask | undefined = this.taskRegistry.get(id);
+        console.log("Task from registry");
         console.log(task);
         if(task) {
-            runInAction('parsing date', () => {
-                this.selectedTask = isUndefined(task) ? null : task;
-                if(this.selectedTask && task) {
-                    this.selectedTask.deadline = new Date(task.deadline);
-                }
-                
-            })
+            task.deadline = new Date(task.deadline);
+            return task;
         }
         else {
+            console.log("Task from was undef");
             this.loading = true;
             try {
                 task = await agent.Tasks.details(id);
-                runInAction('getting single task',() => {
-                    this.selectedTask = isUndefined(task) ? null : task;
-                    if(this.selectedTask && task) {
-                        this.selectedTask.deadline = new Date(task.deadline);
-                    }
-                    this.loading = false;
-                })
-            } catch (error) {
+                if(task){
+                    task.deadline = new Date(task.deadline);
+                    return task;
+                }}
+             catch (error) {
                 runInAction('error getting single task',() => {
-                    this.loading = false; 
                     toast.error('Problem loading task');
                 })
             }

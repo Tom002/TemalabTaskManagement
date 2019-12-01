@@ -13,7 +13,7 @@ import TaskStore from "../../app/stores/taskStore";
 import { observer } from "mobx-react-lite";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { runInAction } from "mobx";
+import { toast } from "react-toastify";
 
 interface DetailParams {
   id: string;
@@ -26,10 +26,10 @@ const TaskForm: React.FC<RouteComponentProps<DetailParams>> = ({
   const taskStore = useContext(TaskStore);
   const {
     loadTask,
-    selectedTask,
     clearTask,
     editTask,
     statesForDropdown,
+    loadStates,
     submitting,
     target
   } = taskStore;
@@ -40,19 +40,15 @@ const TaskForm: React.FC<RouteComponentProps<DetailParams>> = ({
       if (isNaN(id)) {
         history.push("/notfound");
       } else {
-        loadTask(id).then(() => {
-          if (selectedTask) {
-            runInAction(() => {
-              setTask(selectedTask);
-            });
+        loadTask(id).then(task => {
+          if (task) {
+            setTask(task);
           }
         });
+        loadStates();
       }
-      return () => {
-        clearTask();
-      };
     }
-  }, [loadTask, selectedTask, clearTask, match.params.id, history]);
+  }, [loadTask, clearTask, match.params.id, history]);
 
   const [task, setTask] = useState<ITask>({
     id: 0,
@@ -84,7 +80,11 @@ const TaskForm: React.FC<RouteComponentProps<DetailParams>> = ({
   };
 
   const handleSubmit = () => {
-    editTask(task).then(() => history.push("/tasks"));
+    editTask(task).then(() => 
+    {
+      history.push(`/viewTask/${task.id}`)
+      toast.info('Task edit successful');
+    });
   };
 
   return (
