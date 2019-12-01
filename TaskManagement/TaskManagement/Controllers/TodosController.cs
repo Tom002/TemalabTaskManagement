@@ -77,17 +77,22 @@ namespace TaskManagement.Controllers
                 return NotFound("Task with given id not found");
             }
             int oldOrder = todo.Order;
+
             if (taskForUpdate.Order != oldOrder)
             {
                 _repo.OrderChange(id,oldOrder,taskForUpdate.Order);
             }
             _mapper.Map(taskForUpdate, todo);
 
-            if (await _repo.SaveAll())
+            if (_repo.IsEntryUpdated(todo))
             {
-                return NoContent();
+                if (await _repo.SaveAll())
+                {
+                    return NoContent();
+                }
+                return BadRequest($"Updating task with id:{id} failed on save");
             }
-            return BadRequest($"Updating task with id:{id} failed on save");
+            return NoContent();
         }
 
         // DELETE api/values/5

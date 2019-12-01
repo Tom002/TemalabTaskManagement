@@ -13,8 +13,7 @@ namespace TaskManagement.DAL.Repositories
         Task<Todo> GetTodo(int taskId);
         void DeleteTodo(Todo task);
         Task CreateTodo(Todo task);
-        Task<bool> TodoExists(int id);
-        Task UpdateTask(int id, Todo task);
+        bool IsEntryUpdated(Todo task);
         Task<bool> SaveAll();
         void OrderChange(int taskId, int oldOrder, int newOrder);
 
@@ -22,6 +21,7 @@ namespace TaskManagement.DAL.Repositories
         Task<State> GetState(int stateId);
         void DeleteState(State state);
         Task CreateState(State state);
+        Task<int> GetStateCount();
 
     }
 }

@@ -47,19 +47,14 @@ namespace TaskManagement.DAL.Repositories
             await _context.Todos.AddAsync(task);
         }
 
-        public async Task<bool> TodoExists(int id)
+        public bool IsEntryUpdated(Todo task)
         {
-            return await _context.Todos.AnyAsync(t => t.Id == id);
-        }
-
-        public async Task UpdateTask(int id, Todo task)
-        {
-            var todo = await _context.Todos.FindAsync(id);
-            int oldOrder = todo.Order;
-            if (task.Order != oldOrder)
+            var taskEntry = _context.ChangeTracker.Entries<Todo>().FirstOrDefault(e => e.Entity.Id == task.Id);
+            if (taskEntry.State == EntityState.Modified)
             {
-                OrderChange(id, oldOrder, task.Order);
+                return true;
             }
+            return false;
         }
 
         public void OrderChange(int taskId, int oldOrder, int newOrder)
@@ -106,6 +101,11 @@ namespace TaskManagement.DAL.Repositories
         public async Task CreateState(State state)
         {
             await _context.States.AddAsync(state);
+        }
+
+        public Task<int> GetStateCount()
+        {
+            return _context.States.CountAsync();
         }
     }
 }
