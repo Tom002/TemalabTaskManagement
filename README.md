@@ -47,7 +47,7 @@ A React alkalmazás a `client-app` mappában található, vázlatos felépítés
 
 	-  `stores`/`taskStore.ts`: Állapotkezelés megvalósítása Mobx alapon.
 
-	-  `App.tsx`: Itt vannak felsorolva a különböző route-ok, és hogy melyik route esetén komponenst kell kirenderelni.
+	-  `App.tsx`: Itt vannak felsorolva a különböző route-ok, és hogy melyik route esetén melyik komponenst kell kirenderelni.
 
 -  `features`: Itt találhatók az alkalmazás React komponensei, kategóriánként külön mappában
 
@@ -63,11 +63,12 @@ A React alkalmazás a `client-app` mappában található, vázlatos felépítés
 
 		-  `TasksGrid.tsx`: Lekérdezi a Task-okat és State-eket a `taskStore`-ból. Minden State Task-jait egy külön oszlopban jeleníti meg, egy Task adatainak megjelenítéséhez a `TaskCard.tsx` komponenst használja. Lehetővé teszi a Taskok State-jének megváltoztatását drag & drop módon, a `react-beautiful-dnd` npm csomag segítségével
 
-		-  `TaskCard.tsx`: Megjeleníti egy paraméterként kapott Task adatait, valamint a hozzá tartozó Edit és Delete gombokat.
+		-  `TaskCard.tsx`: Az url-ben lévő id alapján betölt egy Taskot a `taskStore` ból , megjeleníti röviden az adatait és a hozzá tartozó Edit és View gombokat.
+		- `TaskDetails.tsx`: id alapján betölt egy Taskot a `taskStore` ból és megjelníti az adatait
 
-		-  `EditForm.tsx`: Betölt egy adott Task-ot, a paramétreként kapott id alapján. A betöltött Task szerkesztését teszi lehetővé. Semantic UI form elemeket használ illetve a `react-datepicker` npm csomagoból származó dátum választót
+		-  `EditForm.tsx`: Az url-ben lévő id alapján betölt egy Taskot a `taskStore` ból és a betöltött Task szerkesztését teszi lehetővé. Semantic UI form elemeket használ illetve a `react-datepicker` npm csomagoból származó dátum választót
 
-		-  `CreateForm.tsx`: Az EditFormhoz hasonlóan működik, csak nem tölt be Taskot, hanem egy üres Taskal inicilizálja magát
+		-  `CreateForm.tsx`: Az EditFormhoz hasonlóan működik, csak nem tölt be Taskot, hanem egy üres Task-al inicilizálja magát
 
 		-  `TaskPriority.tsx`: Taskok prioritásának változtatását teszi lehetővé drag & drop módon, a Taskok adatait `TaskPriorityCard.tsx` segítségével jeleníti meg
 
@@ -96,16 +97,14 @@ Az alkalmazás alapértelmezetten a `localhost:3000/` url-en fut.
   
 ## .Net Core alkalmazás beüzemelése
 
-  
-
 Az alkalmazásnak egy SQL Server alapú adatbázisra van szüksége a működéshez. A `TaskManagement.Web`/`appsettings.json` fájlban kell átírni a connection string-et.
+Az alkalmazás indítás után egy `TaskManagement` nevű adatbázist keres az adatbázis szerveren, ha nincs ilyen nevű adatbázis akkor létrehoz egyet majd végrehajtja rajta a `TaskManagement.DAL`/`Migrations` mappában lévő migrációkat. 
 
   
-
-- Megnyitva `TaskManagement.sln` fájlt, a Visual Studio automatikusan letölti a függőségeket, ezután egyből futtathatjuk az alkalmazást a beépített IIS webszerveren.
+Megnyitva `TaskManagement.sln` fájlt, a Visual Studio automatikusan letölti a függőségeket, ezután egyből futtathatjuk az alkalmazást a beépített IIS webszerveren.
 
 - Visual Studio nélkül
-	- Navigáljunk terminálban a `Task management`/`TaskManagement.Web` mappába és adjuk ki a `dotnet run` parancsot. Ez a parancs automatikusan letölti a függőségeket, le buildeli, majd elindítja az alkalmazást.
+Navigáljunk terminálban a `Task management`/`TaskManagement.Web` mappába és adjuk ki a `dotnet run` parancsot. Ez a parancs automatikusan letölti a függőségeket, le buildeli, majd elindítja az alkalmazást.
 
 (.Net Core 2.0 előtt manuálisan kellett kiadni `dotnet restore` parancsot a függőségek letöltéséhez, de a mostani verzióban ez implicit megtörténik) 
 
@@ -123,4 +122,6 @@ A React alkalmazás debugolásához jól használható a React DevTools böngés
 [Firefox devtools extension](https://addons.mozilla.org/hu/firefox/addon/react-devtools/)
 
 A .Net Core alkalmazás könnyen debugolható a Visual Studio beépített debuggerét használva. 
+
+
 
