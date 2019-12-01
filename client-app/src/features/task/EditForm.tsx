@@ -29,8 +29,6 @@ const TaskForm: React.FC<RouteComponentProps<DetailParams>> = ({
     selectedTask,
     clearTask,
     editTask,
-    loadStates,
-    stateRegistry,
     statesForDropdown,
     submitting,
     target
@@ -44,8 +42,6 @@ const TaskForm: React.FC<RouteComponentProps<DetailParams>> = ({
       } else {
         loadTask(id).then(() => {
           if (selectedTask) {
-            console.log("Back from server");
-            console.log(selectedTask);
             runInAction(() => {
               setTask(selectedTask);
             });
@@ -56,11 +52,7 @@ const TaskForm: React.FC<RouteComponentProps<DetailParams>> = ({
         clearTask();
       };
     }
-
-    if (stateRegistry.size === 0) {
-      loadStates();
-    }
-  }, [loadTask, selectedTask, clearTask, match.params.id, history, loadStates, stateRegistry.size]);
+  }, [loadTask, selectedTask, clearTask, match.params.id, history]);
 
   const [task, setTask] = useState<ITask>({
     id: 0,
