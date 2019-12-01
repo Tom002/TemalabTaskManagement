@@ -48,6 +48,12 @@ namespace TaskManagement.Web.Controllers
         public async Task<IActionResult> CreateState([FromBody] StateForCreationDto stateForCreation)
         {
             var state = _mapper.Map<StateForCreationDto, State>(stateForCreation);
+
+            int stateCount = await _repo.GetStateCount();
+            if (stateCount >= 4)
+            {
+                return BadRequest("You have reached the maximum number of states already");
+            }
             await _repo.CreateState(state);
 
             if (await _repo.SaveAll())
