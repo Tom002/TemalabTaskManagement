@@ -77,7 +77,7 @@ A React alkalmazás a `client-app` mappában található, vázlatos felépítés
 - NET Core SDK 2.2 vagy frissebb verzió 
 	- [.Net Core 2.2 letöltés](https://dotnet.microsoft.com/download/dotnet-core/2.2)
 - Npm csomagkezelő a React alkalmazáshoz
-	- Ezt legegyszerűbben a **NodeJs** telepítésével szerezhetjük be.
+	- Ezt legegyszerűbben a NodeJs telepítésével szerezhetjük be.
 	- [NodeJs letöltés](https://nodejs.org/en/download/)
 	- Telepítés után kiadhatjuk egy terminálban az `npm -v` parancsot hogy ellenőrizzük hogy feltelepült-e, illetve hogy milyen verzió települt fel.
 - Microsoft Sql Server 2012 vagy újabb
@@ -113,11 +113,14 @@ Az alkalmazás mindkét esetben a `http://localhost:52126/api` url-en fog futni.
 Ezt át lehet írni `TaskManagement.Web`/`Properties`/`launchSettings.json` fájlban, ekkor azonban ezt a React alkalmazásban is át kell írni az `src`/`app`/`api`/`agent.ts` fájlban.
 
 Unit tesztek futtathatóak fordítás után a Visual Studio Test/TestExplorer ablakában.
+Vagy ha nem használunk Visual Studio-t akkor a `Task management` mappába navigálva terminálból kiadható a `dotnet test`
+parancs a tesztek futtatásához.
 
-## Build, debug
+## Debug
 
 A React alkalmazás debugolásához jól használható a React DevTools böngésző bővítmény, ami letölthető Chrome és Firefox böngészőkhöz.
 [Chrome devtools extension](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)
 [Firefox devtools extension](https://addons.mozilla.org/hu/firefox/addon/react-devtools/)
 
-A .Net Core alkalmazás könnyen debugolható a Visual Studio beépített debuggerét használva
+A .Net Core alkalmazás könnyen debugolható a Visual Studio beépített debuggerét használva. 
+
