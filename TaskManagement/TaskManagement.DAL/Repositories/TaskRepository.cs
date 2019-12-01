@@ -20,7 +20,7 @@ namespace TaskManagement.DAL.Repositories
 
         public async Task<IEnumerable<Todo>> ListTodos()
         {
-            return await _context.Todos.ToListAsync();
+            return await _context.Todos.AsNoTracking().ToListAsync();
         }
 
         public async Task<Todo> GetTodo(int taskId)
@@ -50,7 +50,7 @@ namespace TaskManagement.DAL.Repositories
         public bool IsEntryUpdated(Todo task)
         {
             var taskEntry = _context.ChangeTracker.Entries<Todo>().FirstOrDefault(e => e.Entity.Id == task.Id);
-            if (taskEntry.State == EntityState.Modified)
+            if (taskEntry!= null && taskEntry.State == EntityState.Modified)
             {
                 return true;
             }
@@ -85,7 +85,7 @@ namespace TaskManagement.DAL.Repositories
 
         public async Task<IEnumerable<State>> ListStates()
         {
-            return await _context.States.ToListAsync();
+            return await _context.States.AsNoTracking().ToListAsync();
         }
 
         public async Task<State> GetState(int stateId)
