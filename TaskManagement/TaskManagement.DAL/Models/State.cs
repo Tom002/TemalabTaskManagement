@@ -11,7 +11,7 @@ namespace TaskManagement.DAL.Models
         public int StateId { get; set; }
 
         [Required]
-        [StringLength(50)]
+        [StringLength(20)]
         public string Name { get; set; }
 
         public ICollection<Todo> Todos { get; set; }
