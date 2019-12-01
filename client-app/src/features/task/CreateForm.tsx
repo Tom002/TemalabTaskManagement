@@ -32,7 +32,6 @@ const CreateForm: React.FC<RouteComponentProps> = ({ history }) => {
     createTask(task).then(() => 
     {
       history.push('/tasks')
-      toast.success(`Task named ${task.title.slice(0, 15)}${task.title.length > 15 ? '...': ''} succesfully created`);
     });
   };
 
@@ -62,9 +61,9 @@ const CreateForm: React.FC<RouteComponentProps> = ({ history }) => {
   }, [loadStates])
 
   return (
-    <Grid>
+    <Grid >
       <Grid.Column width={10}>
-        <Segment clearing style={{ marginTop: "3.5em" }}>
+        <Segment clearing style={{ marginTop: "3.5em", marginLeft: "3em" }}>
         <Form onSubmit={handleFormSubmit}>
                 <Form.Input maxLength="50" required onChange={handleInputChange} name='title' placeholder='Title' value={task.title} />
                 <Form.TextArea maxLength="500" required  onChange={handleInputChange} name='description' placeholder='Description' value={task.description}/>

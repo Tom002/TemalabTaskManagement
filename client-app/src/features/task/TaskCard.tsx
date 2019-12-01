@@ -7,6 +7,7 @@ import TaskStore from "../../app/stores/taskStore";
 import { Draggable } from "react-beautiful-dnd";
 import styled from "styled-components";
 import Moment from "react-moment";
+import { toast } from "react-toastify";
 
 //background-color: ${(props: any) => (props.isDragging ? 'lightgreen': 'white')};
 
@@ -27,7 +28,7 @@ interface IProps {
 
 const TaskCard: React.FC<IProps> = ({ task }) => {
   const taskStore = useContext(TaskStore);
-  const { deleteTask, submitting, target } = taskStore;
+  const { deleteTask } = taskStore;
 
   return (
     <Draggable draggableId={String(task.id)} index={task.order}>
@@ -58,10 +59,7 @@ const TaskCard: React.FC<IProps> = ({ task }) => {
                 <Button
                   negative
                   name={task.id}
-                  loading={submitting && target === task.id}
-                  onClick={e => {
-                    deleteTask(e, task.id);
-                  }}
+                  onClick={() =>deleteTask(task.id)}
                 >
                   Delete
                 </Button>

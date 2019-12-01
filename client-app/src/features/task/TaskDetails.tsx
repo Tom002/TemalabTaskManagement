@@ -29,9 +29,7 @@ const TaskDetails: React.FC<RouteComponentProps<DetailParams>> = ({
   const taskStore = useContext(TaskStore);
   const {
     loadTask,
-    selectedTask,
     loadStates,
-    clearTask,
     stateRegistry
   } = taskStore;
 
@@ -54,7 +52,7 @@ const TaskDetails: React.FC<RouteComponentProps<DetailParams>> = ({
         })
       }
     }
-  }, [loadTask, clearTask, match.params.id, history]);
+  }, [loadTask, match.params.id, history]);
 
   const [stateName, setStateName] = useState<String>("");
 

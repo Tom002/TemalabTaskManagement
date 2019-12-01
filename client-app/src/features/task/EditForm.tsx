@@ -26,12 +26,9 @@ const TaskForm: React.FC<RouteComponentProps<DetailParams>> = ({
   const taskStore = useContext(TaskStore);
   const {
     loadTask,
-    clearTask,
     editTask,
     statesForDropdown,
-    loadStates,
-    submitting,
-    target
+    loadStates
   } = taskStore;
 
   useEffect(() => {
@@ -48,7 +45,7 @@ const TaskForm: React.FC<RouteComponentProps<DetailParams>> = ({
         loadStates();
       }
     }
-  }, [loadTask, clearTask, match.params.id, history]);
+  }, [loadTask,match.params.id, history]);
 
   const [task, setTask] = useState<ITask>({
     id: 0,
@@ -83,14 +80,13 @@ const TaskForm: React.FC<RouteComponentProps<DetailParams>> = ({
     editTask(task).then(() => 
     {
       history.push(`/viewTask/${task.id}`)
-      toast.info('Task edit successful');
     });
   };
 
   return (
     <Grid>
       <Grid.Column width={10}>
-        <Segment clearing style={{ marginTop: "3.5em" }}>
+        <Segment clearing style={{ marginTop: "3.5em", marginLeft: "3em"  }}>
           <Form onSubmit={handleSubmit}>
             <Form.Input
               maxLength="50"
@@ -128,7 +124,6 @@ const TaskForm: React.FC<RouteComponentProps<DetailParams>> = ({
               onChange={handleDropdownChange}
             />
             <Button
-              loading={submitting && target === task.id}
               floated="right"
               positive
               type="submit"

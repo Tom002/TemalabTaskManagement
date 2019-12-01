@@ -1,10 +1,11 @@
 import React, { useContext, useEffect } from "react";
-import {Card, Button, Icon } from "semantic-ui-react";
+import { Card, Button } from "semantic-ui-react";
 import TaskCard from "./TaskCard";
 import TaskStore from "../../app/stores/taskStore";
 import { observer } from "mobx-react-lite";
 import styled from "styled-components";
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
+import { toast } from "react-toastify";
 
 const Container = styled.div`
   margin-top: 4em;
@@ -64,8 +65,7 @@ const TasksGrid: React.FC = () => {
   useEffect(() => {
     loadTasks();
     loadStates();
-
-  }, [loadTasks, loadStates])
+  }, [loadTasks, loadStates]);
 
   return (
     <DragDropContext onDragEnd={onDragEnd}>
@@ -87,7 +87,9 @@ const TasksGrid: React.FC = () => {
                           color="red"
                           basic
                           className={"right floated mini"}
-                          onClick={() => deleteState(state.stateId)}
+                          onClick={() => {
+                            deleteState(state.stateId);
+                          }}
                         >
                           Delete
                         </Button>

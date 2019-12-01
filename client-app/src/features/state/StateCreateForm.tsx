@@ -34,14 +34,13 @@ const StateCreateForm : React.FC<RouteComponentProps> = ({history}) => {
         createState(state).then(() =>
         {
           history.push('/tasks');
-          toast.success(`State named ${state.name} succesfully created`);
         });
     }
     
     return (
         <Grid>
         <Grid.Column width={10}>
-          <Segment clearing style={{marginTop: '3.5em'}}>
+          <Segment clearing style={{marginTop: '3.5em', marginLeft: "3em" }}>
             <Form onSubmit={handleSubmit}>
                 <Form.Input maxLength="20" onChange={handleInputChange} name='name' placeholder='Title' value={state.name}/>
                 <Button floated='right' positive type='submit' content='Submit'/>
