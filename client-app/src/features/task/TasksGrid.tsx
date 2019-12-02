@@ -5,10 +5,10 @@ import TaskStore from "../../app/stores/taskStore";
 import { observer } from "mobx-react-lite";
 import styled from "styled-components";
 import { DragDropContext, DropResult, Droppable } from "react-beautiful-dnd";
-import { toast } from "react-toastify";
 
 const Container = styled.div`
-  margin-top: 4em;
+  margin-top: 3.5em;
+  margin-left: 3em;
   display: flex;
 `;
 

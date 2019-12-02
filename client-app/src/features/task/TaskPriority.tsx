@@ -32,7 +32,7 @@ const TaskPriority: React.FC = () => {
 
   return (
     <div>
-      <Grid style={{ marginTop: "4em", marginLeft: "2em" }}>
+      <Grid style={{ marginTop: "3.5em", marginLeft: "3em" }}>
         <DragDropContext onDragEnd={onDragEnd}>
           <Grid.Column width={10}>
             <Droppable droppableId={"priority"}>

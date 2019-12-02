@@ -12,7 +12,6 @@ import {
 } from "semantic-ui-react";
 import { observer } from "mobx-react-lite";
 import DatePicker from "react-datepicker";
-import { toast } from "react-toastify";
 
 const CreateForm: React.FC<RouteComponentProps> = ({ history }) => {
   const taskStore = useContext(TaksStore);
