@@ -73,7 +73,7 @@ namespace TaskManagement.Web.Controllers
             {
                 return NotFound($"State with id:{id} not found");
             }
-            _repo.DeleteState(state);
+            await _repo.DeleteState(state);
 
             if (await _repo.SaveAll())
             {

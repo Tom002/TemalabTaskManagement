@@ -93,8 +93,13 @@ namespace TaskManagement.DAL.Repositories
             return await _context.States.FirstOrDefaultAsync(s => s.StateId == stateId);
         }
 
-        public void DeleteState(State state)
+        public async Task DeleteState(State state)
         {
+            var todosWithState = await _context.Todos.Where(t => t.StateId == state.StateId).ToListAsync();
+            foreach (var todo in todosWithState)
+            {
+                DeleteTodo(todo);
+            }
             _context.States.Remove(state);
         }
 

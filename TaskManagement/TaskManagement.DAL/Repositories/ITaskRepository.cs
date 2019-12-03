@@ -19,7 +19,7 @@ namespace TaskManagement.DAL.Repositories
 
         Task<IEnumerable<State>> ListStates();
         Task<State> GetState(int stateId);
-        void DeleteState(State state);
+        Task DeleteState(State state);
         Task CreateState(State state);
         Task<int> GetStateCount();
 

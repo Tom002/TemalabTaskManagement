@@ -131,11 +131,19 @@ class TaskStore {
         a => a.stateId === stateId
       );
       for (const task of tasksWithState) {
-        this.taskRegistry.delete(task.id);
+        runInAction("delete task", () => {
+          this.taskRegistry.delete(task.id);
+          let keys: number[] = Array.from(this.taskRegistry.keys());
+          for (let key of keys) {
+            let element = this.taskRegistry.get(key);
+            if (element && element.order > task!.order) {
+              element.order--;
+              this.taskRegistry.set(key, element);
+            }
+          }
+          this.stateRegistry.delete(stateId);
+        });
       }
-      runInAction("deleting status", () => {
-        this.stateRegistry.delete(stateId);
-      });
       toast.warn(`State successfuly deleted`);
     } catch (error) {
       runInAction("deleting state error", () => {

@@ -23,7 +23,7 @@ namespace TaskManagement.Controllers
             _mapper = mapper;
         }
 
-        // GET api/values
+        // GET api/todos
         [HttpGet]
         [ProducesResponseType(200)]
         public async Task<IActionResult> GetTasks()
@@ -33,7 +33,7 @@ namespace TaskManagement.Controllers
             return Ok(todosToReturn);
         }
 
-        // GET api/values/5
+        // GET api/todos/5
         [HttpGet("{id}")]
         [ProducesResponseType(200)]
         [ProducesResponseType(404)]
@@ -48,7 +48,7 @@ namespace TaskManagement.Controllers
             return Ok(todoToReturn);
         }
 
-        // POST api/values
+        // POST api/todos
         [HttpPost]
         [ProducesResponseType(201)]
         [ProducesResponseType(400)]
@@ -64,7 +64,7 @@ namespace TaskManagement.Controllers
             return BadRequest("Creating task failed on save");
         }
 
-        // PUT api/values/5
+        // PUT api/todos/5
         [HttpPut("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
@@ -95,7 +95,7 @@ namespace TaskManagement.Controllers
             return NoContent();
         }
 
-        // DELETE api/values/5
+        // DELETE api/todos/5
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         [ProducesResponseType(404)]
@@ -114,7 +114,6 @@ namespace TaskManagement.Controllers
                 return NoContent();
             }
             return BadRequest($"Deleting task with id:{id} failed on save");
-
         }
     }
 }
