@@ -1,0 +1,40 @@
+version: '3.4'
+
+services:
+  taskmanagement.web:
+    image: ${DOCKER_REGISTRY-}taskmanagementweb
+    container_name: "taskmanagementApi"
+    build:
+      context: .
+      dockerfile: TaskManagement/Dockerfile
+    networks:
+      - taskmanagement-network
+    depends_on:
+      - sqlServer
+    ports:
+      - "5120:80"
+
+  sqlServer:  
+    image: microsoft/mssql-server-linux:2017-latest
+    environment:  
+      ACCEPT_EULA: Y  
+      SA_PASSWORD: "BigPassw0rd"
+    volumes:
+      - sqlData:/var/opt/mssql
+    networks:
+      - taskmanagement-network
+
+  reactClient:
+    image: react-docker:latest
+    ports:
+      - "4000:80"
+    networks:
+      - taskmanagement-network
+
+networks:
+  taskmanagement-network:
+    driver: bridge
+
+volumes:
+  sqlData:
+    external: false

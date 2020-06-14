@@ -180,7 +180,7 @@ namespace TaskManagement.Test
 
                 Assert.Equal(2,todosInProgress.Count);
 
-                repo.DeleteState(inProgressState);
+                await repo.DeleteState(inProgressState);
                 await repo.SaveAll();
 
                 var stateAfterDelete = await repo.GetState(2);

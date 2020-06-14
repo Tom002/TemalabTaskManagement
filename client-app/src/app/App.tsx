@@ -48,7 +48,6 @@ const App: React.FC = () => {
         />
         <Route component={NotFound}/>
       </Switch>
-
     </Fragment>
   );
 }

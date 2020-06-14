@@ -36,6 +36,7 @@ namespace TaskManagement.Web.Controllers
         public async Task<IActionResult> GetState(int id)
         {
             var state = await _repo.GetState(id);
+            var containsTodos = state.Todos.Any();
             if (state == null)
             {
                 return NotFound("State with given id was not found");

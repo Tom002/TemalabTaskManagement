@@ -4,9 +4,7 @@ import { IState } from '../models/IState';
 import { toast } from 'react-toastify';
 import {history} from '../../index';
 
-//axios.defaults.baseURL = 'https://my-json-server.typicode.com/Tom002/Temalab';
-
-axios.defaults.baseURL = 'http://localhost:52126/api';
+axios.defaults.baseURL = 'http://taskmanagementApi/api/';
 
 axios.interceptors.response.use(undefined, error => {
     const {status} = error.response;
